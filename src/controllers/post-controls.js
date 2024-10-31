@@ -2,9 +2,10 @@ import Post from "../models/post-models.js";
 
 export const createPost = async (req, res) => {
     const { title, body } = req.body;
+    const image = req.file ? req.file.filename : null
 
     try {
-        const post = new Post({ title, body })
+        const post = new Post({ title, body, image })
         const savedPost = await post.save()
 
         return res.status(201).json({
